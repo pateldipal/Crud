@@ -1,0 +1,77 @@
+<div class="signup-form">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h2>Register</h2>
+    <div class="form-group">
+      <div class="row">
+
+        <div class="col">
+          <input type="number" class="form-control"  formControlName="id" placeholder="ID" [ngClass]="{ 'is-invalid': submitted && f.id.errors }"  required="required" id="empId">
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" formControlName="fname"  [ngClass]="{ 'is-invalid': submitted && f.fname.errors }"  placeholder="First Name" required="required">
+          <div *ngIf="submitted && f.fname.errors" class="invalid-feedback">
+            <div *ngIf="f.fname.errors.required">First Name is required</div>
+          </div>
+        </div>
+        <div class="col">
+          <input type="text" class="form-control" formControlName="lname" placeholder="Last Name" [ngClass]="{ 'is-invalid': submitted && f.lname.errors }" required="required">
+          <div *ngIf="submitted && f.lname.errors" class="invalid-feedback">
+            <div *ngIf="f.lname.errors.required">Last Name is required</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="text" formControlName="email" class="form-control" placeholder="Enetr Your Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+      <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+        <div *ngIf="f.email.errors.required">Email is required</div>
+        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <input type="password" formControlName="password" class="form-control" placeholder="Password"  [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+      <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+        <div *ngIf="f.password.errors.required">Password is required</div>
+        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }"  value="male">
+        <label class="form-check-label">male</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }" value="female">
+        <label class="form-check-label" >female</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <textarea class="form-control" formControlName="address" placeholder="Address" [ngClass]="{'is-invalid': submitted && f.address.errors}"  rows="3" id="comment"></textarea>
+      <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+        <div *ngIf="f.address.errors.required">Address is required</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>City</label>
+      <select formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+        <option value="">Select City</option>
+        <option value="surat">surat</option>
+        <option value="Ahmedabad">Ahmedabad</option>
+        <option value="Vadodara">Vadodara</option>
+        <option value="Rajkot">Rajkot</option>
+      </select>
+      <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+        <div *ngIf="f.city.errors.required">City is required</div>
+      </div>
+
+    </div>
+    <br>
+
+    <div class="text-center">
+      <button class="btn btn-success" *ngIf="!update" >Register</button>
+      <button class="btn btn-success" *ngIf="update">Update</button>
+      <button class="btn btn-secondary" type="reset" (click)="onReset()">Cancel</button>
+    </div>
+  </form>
+  <app-table *ngIf="products" [product]="products" (dataEvent)="childe($event)"></app-table>
+</div>
